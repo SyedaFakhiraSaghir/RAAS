@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Recipe</title>
+    <link rel="stylesheet" href="/public/edit-recipe.css">
+</head>
+<body>
+    <div class="background">
+        <h2>Edit Recipe</h2>
+        <form action="/edit/<%= recipe.id %>" method="POST">
+            <label for="recipe_name">Recipe Name</label>
+            <input type="text" id="recipe_name" name="recipe_name" value="<%= recipe.recipe_name %>" required><br><br>
+            
+            <label for="ingredients">Ingredients</label>
+            <input type="text" id="ingredients" name="ingredients" value="<%= recipe.ingredients %>" required><br><br>
+
+            <label for="recipe">Recipe</label>
+            <input type="text" id="recipe" name="recipe" value="<%= recipe.recipe %>" required><br><br>
+            
+            <label for="author">Author Name</label>
+            <input type="text" id="author" name="author" value="<%= recipe.author %>"><br><br>
+
+            <button class="btn" type="submit">Update Recipe</button>
+        </form>
+    </div>
+</body>
+</html>

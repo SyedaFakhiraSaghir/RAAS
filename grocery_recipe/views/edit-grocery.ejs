@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Grocery</title>
+    <link rel="stylesheet" href="/public/grocery.css">
+</head>
+<body>
+    <div class="background">
+        <h1>Edit Grocery Item</h1>
+        <form action="/edit/<%= grocery.id %>" method="POST">
+            <label for="item">Item</label>
+            <input type="text" id="item" name="item" value="<%= grocery.item %>" required><br><br>
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" name="quantity" value="<%= grocery.quantity %>" required><br><br>
+            <label for="unit">Unit</label>
+            <input type="text" id="unit" name="unit" value="<%= grocery.unit %>"><br><br>
+            <label for="brand">Brand</label>
+            <input type="text" id="brand" name="brand" value="<%= grocery.brand %>"><br><br>
+            <button class='btn' type="submit">Update</button>
+        </form>
+    </div>
+</body>
+</html>

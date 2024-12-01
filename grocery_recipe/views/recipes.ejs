@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Recipes</title>
+    <link rel="stylesheet" href="/public/recipe_main.css">
+</head>
+<body>
+    <div class="header">
+        <a href="#default" class="logo">RAAS</a>
+        <div class="header-right">
+          <a class="active" href="http://localhost:3000/home">Home</a>
+        </div>
+    </div>
+    <div class="hero">
+        <h1>RECIPES</h1>
+        <p>Organize your recipes easily</p>
+    </div>
+    <div class="background">
+        <a href="/add"><button class="btn">Add Recipe +</button></a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Recipe Name</th>
+                    <th>Ingredients</th>
+                    <th>Recipe</th>
+                    <th>Author</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% recipes.forEach(recipe => { %>
+                    <tr>
+                        <td><%= recipe.recipe_name %></td>
+                        <td><%= recipe.ingredients %></td>
+                        <td><%= recipe.recipe %></td>
+                        <td><%= recipe.author %></td>
+                        <td>
+                            <a href="/edit/<%= recipe.id %>">Edit</a>
+                            <a href="/delete/<%= recipe.id %>" onclick="">Delete</a>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+    <footer>
+        <div class="container">
+            <p>&copy; AP</p>
+        </div>
+    </footer>
+</body>
+</html>

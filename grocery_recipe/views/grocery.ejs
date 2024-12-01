@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Management</title>
+    <link rel="stylesheet" href="/grocery-main.css">
+</head>
+<body>
+    <header>
+        <div className="logo">RAAS</div>
+        <nav>
+            <a href="/home"><button className="btns">Home</button></a>
+        </nav>
+    </header>
+    <div className="hero">
+        <h1>GROCERY LIST</h1>
+        <p>Manage your grocery List</p>
+    </div>
+    <div id='add-form' className="background">
+        <a href="/add"><button className="btn">Add Item</button></a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Unit</th>
+                    <th>Brand</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="grocery-table-body">
+                <!-- Grocery items will be dynamically populated here -->
+            </tbody>
+        </table>
+    </div>
+
+</body>
+<script>
+    useEffect(() => {
+    // Retrieve userId from localStorage on component mount
+    const storedUserId = localStorage.getItem('userId');
+    setUserId(storedUserId);
+
+    // Redirect to login if userId is not found
+    if (!storedUserId) {
+      alert('You are not logged in. Please log in first.');
+      navigate('/');
+    }
+  }, [navigate]);
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const userId = localStorage.getItem('userId'); // Retrieve userId from localStorage
+
+        if (userId) {
+            fetch('http://localhost:5001/some-endpoint', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'user-id': userId, // Attach userId in the headers
+                },
+            })
+            .then(response => response.json())
+            .then(data => console.log('Data:', data))
+            .catch(error => console.error('Error:', error));
+        } else {
+            console.error('User ID not found in localStorage');
+            alert('Please log in first!');
+        }
+        // Fetch grocery data from backend
+        fetch(`http://localhost:5001/groceries`, {  // Make sure this endpoint exists in your backend.
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "user-id": userId, // Sending user ID as a header
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Request failed: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Fetched groceries:", data);
+            populateTable(data);  // Populate the table with fetched groceries
+        })
+        .catch(error => {
+            console.error("Error fetching groceries:", error);
+        });
+    });
+
+    // Function to dynamically populate the grocery table
+    function populateTable(groceries) {
+        const tableBody = document.getElementById("grocery-table-body");
+        tableBody.innerHTML = ""; // Clear the table body
+
+        groceries.forEach(grocery => {
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${grocery.item}</td>
+                <td>${grocery.quantity}</td>
+                <td>${grocery.unit}</td>
+                <td>${grocery.brand}</td>
+                <td>
+                    <a href="/edit/${grocery.id}">Edit</a>
+                    <a href="/delete/${grocery.id}" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
+                </td>
+            `;
+
+            tableBody.appendChild(row);
+        });
+    }
+</script>
+</html>

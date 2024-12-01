@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Recipe</title>
+    <link rel="stylesheet" href="/public/grocery.css">
+</head>
+<body>
+    <div class="background">
+        <h2>Add a New Recipe</h2>
+        <form action="/add-recipe" method="POST">
+            <label for="recipe_name">Recipe Name</label>
+            <input type="text" id="recipe_name" name="recipe_name" required><br><br>
+            
+            <label for="ingredients">Ingredients</label>
+            <input type="text" id="ingredients" name="ingredients" required><br><br>
+
+            <label for="recipe">Recipe</label>
+            <input type="text" id="recipe" name="recipe" required><br><br>
+            
+            <label for="author">Author Name</label>
+            <input type="text" id="author" name="author"><br><br>
+
+            <button class="btn" type="submit">Add Recipe</button>
+        </form>
+    </div>
+</body>
+</html>

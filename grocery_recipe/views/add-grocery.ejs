@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Grocery</title>
+    <link rel="stylesheet" href="/public/grocery.css">
+</head>
+<body>  
+    <div class="background">
+        <h1>Add Grocery Item</h1>
+        <form action="/add" method="POST">
+            <label for="item">Item</label>
+            <input type="text" id="item" name="item" required><br><br>
+
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" name="quantity" required><br><br>
+
+            <label for="unit">Unit</label>
+            <input type="text" id="unit" name="unit"><br><br>
+            
+            <label for="brand">Brand</label>
+            <input type="text" id="brand" name="brand"><br><br>
+            
+            <button type="submit">Add</button>
+        </form>
+    </div>
+</body>
+</html>
